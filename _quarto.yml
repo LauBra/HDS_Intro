@@ -1,0 +1,49 @@
+project:
+  type: website
+  render: 
+  - "*.qmd"
+
+execute:
+  echo: true
+  python:
+    version: "r-reticulate"
+    
+website:
+  back-to-top-navigation: true
+  page-navigation: true
+  title: "HDS MSc - Module 3 - Introduction"
+  navbar:
+    background: primary
+    search: true
+    left:
+      - text: "Introduction"
+        file: Python_vs_R_Examples.qmd
+ 
+  sidebar:
+    - title: "Introduction"
+      contents:
+        - Python_vs_R_Examples.qmd
+        - Introduction_DataShift_P.qmd
+        - Introduction_DataShift.qmd
+        - HealthyR_Summary.qmd
+  
+  page-footer: 
+    left: "Copyright 2025, Laura Bravo" 
+    background: light
+    right: 
+      - icon: twitter 
+        href: https://twitter.com/laura_bravo94
+      - icon: github
+        href: https://github.com/LauBra/RIntro2023
+    
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+   # code-fold: true
+    code-tools: true
+    code-link: true
+
+editor: visual
+

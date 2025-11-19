@@ -1,0 +1,127 @@
+---
+title: 'Python vs R'
+format: html
+editor: visual
+---
+
+Comparison between the main libraries you will be using in R and Python for this module.
+
+------------------------------------------------------------------------
+
+### **`Pandas` Equivalent: `dplyr` from `tidyverse`**
+
+Used for data wrangling. Example: Filtering a dataset.
+
+```{python}
+# Python
+
+import pandas as pd
+data = pd.DataFrame({'age': [23, 45, 12, 36], 'score': [87, 56, 92, 77]})
+filtered_data = data[data['age'] > 20]
+
+filtered_data.head()
+```
+
+```{r}
+#| output: false
+library(dplyr)
+
+data <- data.frame(age = c(23, 45, 12, 36), score = c(87, 56, 92, 77))
+filtered_data <- data %>% filter(age > 20)
+
+head(filtered_data)
+```
+
+------------------------------------------------------------------------
+
+### **`Scikit-learn` Equivalent: `caret` and `tidymodels`**
+
+Used for machine learning Example: Fitting a linear regression algorithm
+
+```{python}
+from sklearn.linear_model import LinearRegression
+model = LinearRegression()
+X = [[1], [2], [3]]
+y = [2, 4, 6]
+model.fit(X, y)
+print(model.intercept_, model.coef_)
+```
+
+```{r}
+# R
+model <- lm(y ~ x, data = data.frame(x = c(1, 2, 3), y = c(2, 4, 6)))
+summary(model)
+```
+
+But can also use tidymodels
+
+```{r}
+#| output: false
+#| 
+library(tidymodels)
+
+lm_model <- linear_reg() %>% 
+            set_engine('lm') %>% # adds lm implementation of linear regression
+            set_mode('regression')
+
+lm_fit <- lm_model %>% 
+          fit(y ~ x, data = data.frame(x = c(1, 2, 3), y = c(2, 4, 6)))
+
+
+lm_fit[["fit"]][["coefficients"]]
+```
+
+------------------------------------------------------------------------
+
+### **`Seaborn` Equivalent: `ggplot2`**
+
+Used for plotting Example: Scatter plot
+
+```{python}
+# Python
+import seaborn as sns
+import matplotlib.pyplot as plt
+sns.scatterplot(x=[1, 2, 3], y=[2, 4, 6])
+plt.show()
+```
+
+```{r}
+# R
+library(ggplot2)
+
+ggplot(data.frame(x = c(1, 2, 3), y = c(2, 4, 6)), aes(x = x, y = y)) +
+  geom_point()
+```
+
+------------------------------------------------------------------------
+
+### **`Numpy` Equivalent: `base`**
+
+Example: Dot product
+
+```{python}
+# Python
+import numpy as np
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+dot_product = np.dot(a, b)
+```
+
+```{r}
+# R
+a <- c(1, 2, 3)
+b <- c(4, 5, 6)
+dot_product <- sum(a * b)
+```
+
+|  |
+|:---|
+| As an exercise now: |
+| 1\) Combine workflow in R - plot and perform linear regression. Can you include the linear regression model in the plot? Check out `geom_smooth` function |
+| 2\) Combined workflow in Python - plot and perform linear regression |
+
+Now take your time and explore the machine learning libraries a bit more. If in doubt about anything being learnt in class, these are your best resources:
+
+-   <https://scikit-learn.org/stable/>
+-   <https://www.tidymodels.org>
+-   <https://topepo.github.io/caret/index.html>
